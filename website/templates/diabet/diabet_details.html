@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% block right_content %}
+<head>
+<meta charset="UTF-8" />
+</head>
+		
+		<div class="title_right">
+			<strong>{{ key_name }}</strong>
+		</div>
+
+
+			<TABLE class="table table-striped table-bordered table-hover">
+				<TBODY>
+				<thead>
+					<tr>
+						<th width="100%" colspan="8" align="center" bgcolor="#5090c1">详细信息</th>
+					</tr>
+				</thead>
+					<TR>
+						<TD colspan="2" class="tdstyle3">姓名</TD>
+						<TD colspan="6" class="tdstyle3">{{record.name}}</TD>
+					</TR>
+					<TR>
+					  <TD colspan="2" class="tdstyle3">编号</TD>
+					  <TD colspan="6" class="tdstyle3">{{record.personProfile.id}}</TD>
+				  </TR>
+					<TR>
+						<TD colspan="2" class="tdstyle3">随访日期</TD>
+						<TD colspan="6" class="tdstyle3">{{record.flupData}}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3"colspan="2">随访方式</TD>
+						<TD class="tdstyle3"  colspan="6">{{record.flupMode}}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3"colspan="2">症状</TD>
+						<TD class="tdstyle3"  colspan="6">{{record.symptomCodes}}</TD>
+					</TR>
+					<TR id="symptom">
+						<TD colspan="2" rowspan="8" class="tdstyle3">体征</TD>
+						<TD colspan="2" rowspan="2" class="tdstyle4">血压</TD>
+						<TD class="tdstyle4" colspan="2">收缩压(mmHg)</TD>
+					    <TD class="tdstyle4">{{record.SBP}}</TD>
+					</TR>
+					<TR id="symptom">
+					 <TD class="tdstyle4" colspan="2">舒张压(mmHg)</TD>
+					    <TD class="tdstyle4">{{record.DBP}}</TD>
+			  </TR>
+					<TR id="generalcondition">
+						<TD colspan="2" class="tdstyle3">体重</TD>
+						<TD class="tdstyle4" colspan="4">{{record.weight}}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3" colspan="2">目标体重</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.weightTarget}}</TD>
+					</TR>
+					
+					<TR>
+					  <TD colspan="2" class="tdstyle3">体质指数</TD>
+					  <TD  colspan="4" class="tdstyle3">{{record.bmi}}</TD>
+			  </TR>
+			  
+					<TR>
+					  <TD colspan="2" class="tdstyle3">目标体质指数</TD>
+					  <TD  colspan="4" class="tdstyle3">{{record.bmiTarget}}</TD>
+			  </TR>
+					<TR>
+					  <TD colspan="2" class="tdstyle3">足背动脉搏动</TD>
+					  <TD  colspan="4" class="tdstyle3">{{record.dorsalisPedisPulseCode}}</TD>
+			 		 </TR>
+					<TR>
+					  <TD colspan="2" class="tdstyle3">其他</TD>
+   					 <TD  colspan="4" class="tdstyle3">{{record.signsOther}}</TD>
+			  </TR>
+					<TR>
+						<TD colspan="2" rowspan="12" class="tdstyle3">生活方式指导</TD>
+						<TD  colspan="2" class="tdstyle3">日吸烟量（支）</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.dailySmoking}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" class="tdstyle3">目标日吸烟量（支）</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.dailySmokingTarget}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" class="tdstyle3">日饮酒量(两)</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.dailyDrinking}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" class="tdstyle3">目标日饮酒量(两)</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.dailyDrinkingTarget}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" rowspan="4" class="tdstyle3">运动</TD>
+						<TD  colspan="2" class="tdstyle3">运动次数/周</TD>
+					    <TD colspan="2" class="tdstyle3">{{record.perWeekMovement}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" class="tdstyle3">目标运动次数/周</TD>
+					    <TD colspan="2" class="tdstyle3">{{record.perWeekMovementTarget}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" class="tdstyle3">运动时长/min</TD>
+					    <TD  colspan="2" class="tdstyle3">{{record.perWeekTimes}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" class="tdstyle3">目标运动时长/min</TD>
+					    <TD  colspan="2" class="tdstyle3">{{record.perWeekTimesTarget}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" class="tdstyle3">日主食量/克</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.stapleFood}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" class="tdstyle3">目标日主食量/克</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.stapleFoodTarget}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" class="tdstyle3">心理调整</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.psychologicalCode}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" class="tdstyle3">遵医行为</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.complianceCode}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" rowspan="4" class="tdstyle3">辅助检查</TD>
+						<TD  colspan="2" class="tdstyle3">空腹血糖值</TD>
+					    <TD colspan="4" class="tdstyle3">{{record.fastingBloodGlucose}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="2" rowspan="3" class="tdstyle3">其他检查</TD>
+					    <TD colspan="2" class="tdstyle3">糖化血红蛋白(%)</TD>
+					    <TD  colspan="2" class="tdstyle3">{{record.HbA1c}}</TD>
+					</TR>
+					<TR>
+						<TD colspan="2" class="tdstyle3">检查日期</TD>
+					    <TD  colspan="2" class="tdstyle3">{{record.aidCheckDate}}</TD>
+					</TR>
+					<TR>
+						<TD colspan="2" class="tdstyle3">其他辅助检查</TD>
+					    <TD  colspan="2" class="tdstyle3">{{record.aidCheck}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="4" class="tdstyle3">服药依从性</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.doseCode}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="4" class="tdstyle3">药物不良反应</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.adverseReactionCode}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="4" class="tdstyle3">低血糖反应</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.lowBloodSugarCode}}</TD>
+					</TR>
+					
+					<TR>
+						<TD  colspan="4" class="tdstyle3">此次随访分类</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.flupTypeCode}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="4" class="tdstyle3">用药情况</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.medicationList}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="4" class="tdstyle3">转诊</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.referralReason}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="4" class="tdstyle3">下次随访日期</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.nextFlupDate}}</TD>
+					</TR>
+					<TR>
+						<TD  colspan="4" class="tdstyle3">随访医生</TD>
+						<TD  colspan="4" class="tdstyle3">{{record.flupDoctorName}}</TD>
+					</TR>
+				</TBODY>
+			</TABLE>
+
+
+
+			<table class="margin-bottom-20 table  no-border">
+				<tr>
+					<td class="text-center"><input type="button" value="确定"
+						class="btn btn-info " style="width: 80px;" onclick="history.go(-1)"/></td>
+				</tr>
+			</table>
+
+
+
+
+
+{% endblock %} 

@@ -1,0 +1,101 @@
+{% extends "admin/base_site.html" %}
+{% block left_content%}
+{% endblock %}
+{% block script_content %}
+{% endblock %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />
+
+{{ form.media }}
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block usertools %}{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div style="height:100%;width:100%;background-size:100%;background-image:url('/static/img/login.jpg');">
+	
+	<div align="middle" style="width:30%; top: 10%; right: 35%; color: black; margin-top: 0%; margin-left: 0%;background:white; position:absolute;border-radius:10px; z-index: 9999;  opacity: 0.9; box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.5);">
+		<h3 align="center">登录</h3>
+		{% if form.errors and not form.non_field_errors %}
+			<p class="errornote">
+				{% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+			</p>
+		{% endif %}
+		{% if form.non_field_errors %}
+			{% for error in form.non_field_errors %}
+			<p class="errornote">
+			    {{ error }}
+			</p>
+			{% endfor %}
+		{% endif %}
+		
+		<div id="content-main">
+		
+				<style type="text/css">
+				label{
+				    height: 30px;
+				 }
+				 input[type="text"], input[type="password"] {
+				    height: 30px;
+				 }
+				 .right_cont{ padding: 0;height: 100%;}
+				 .right{ padding: 0;width:100%;height: 100%;}
+				 #middle{ bottom: 0px;width:100%;height: 100%;}
+				 body{line-height: 0px;}
+				</style>
+			{% if user.is_authenticated %}
+				<p class="errornote">
+				{% blocktrans with username=request.user.username trimmed %}
+				    You are authenticated as {{ username }}, but are not authorized to
+				    access this page. Would you like to login to a different account?
+				{% endblocktrans %}
+				</p>
+			{% endif %}
+			
+			<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+			<style type="text/css">
+			input[type="text"], input[type="password"]{padding: 0px 0px; background-color:#fff;width:90%}
+			</style>
+			
+				<table  width=100%>
+				  	<tr>
+				  		<td width=20%  align="right">  {{ form.username.label_tag }}</td>
+					    <td width=60% >{{ form.username }}</td>
+						<td width=20% align="left">{{ form.username.errors }}</td>
+					 </tr>
+					<tr >
+					     <td width=20% align="right">{{ form.password.label_tag }}</td>
+					     <td width=60%> {{ form.password }}</td>
+					     <td width=20% align="left">{{ form.password.errors }}</td>
+			     	</tr>
+			     </table>
+			    <input type="hidden" name="next" value="{{ next }}" />
+			  {% url 'admin_password_reset' as password_reset_url %}
+			  {% if password_reset_url %}
+			  <div class="password-reset-link">
+			    <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
+			  </div>
+			  {% endif %}
+			  <div class="submit-row" style="margin:10px 10px">
+			    <input type="submit" value="{% trans 'Log in' %}" />
+			  </div>
+			</form>
+			
+			<script type="text/javascript">
+			document.getElementById('id_username').focus()
+			</script>
+		</div>
+	
+	</div>
+	
+</div>
+{% endblock %}

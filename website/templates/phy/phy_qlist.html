@@ -1,0 +1,62 @@
+<table class="table table-striped table-bordered table-hover"
+	style="table-layout: fixed;">
+	<thead>
+		<tr>
+			<th colspan="6" align="center" bgcolor="#5090c1" color="#fff">
+				成人健康体检列表</th>
+		</tr>
+	</thead>
+
+	<thead>
+		<tr>
+			<th>健康档案档案编号</th>
+			<!-- class="border_right wid100" -->
+
+			<th>姓名</th>
+
+			<th>性别</th>
+
+
+			<th>检查日期</th>
+
+			<th>检查机构</th>
+
+			<th>详细</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for record in records %}
+		<tr>
+			<td nowrap="nowrap"
+				style="overflow: hidden; text-overflow: ellipsis;"
+				title='36068100200521000010'>{{record.healthFileNumber}}</td>
+
+			<td nowrap="nowrap"
+				style="overflow: hidden; text-overflow: ellipsis;" title='赵斌斌'>
+				{{record.name}}</td>
+
+			<td nowrap="nowrap"
+				style="overflow: hidden; text-overflow: ellipsis;" title='男'>
+				{{record.genderCode}}</td>
+
+			<td nowrap="nowrap"
+				style="overflow: hidden; text-overflow: ellipsis;" title='520000'>
+				{{record.examinationDate }}</td>
+
+			<td nowrap="nowrap"
+				style="overflow: hidden; text-overflow: ellipsis;" title='520000'>
+				{{record.orgCode }}</td>
+
+
+			<td>
+				<a href="{% url 'phy_details' record.ID %}"> 查看</a> <a
+				href="/admin/website/tbhealexamination/{{ record.ID }}/change/">
+					修改</a> 
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+
+
+</table>

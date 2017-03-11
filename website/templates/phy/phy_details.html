@@ -1,0 +1,509 @@
+{% extends 'base.html' %}
+{% block right_content %}
+
+		
+		<div class="title_right">
+			<strong>{{ key_name }}</strong>
+		</div>
+			<TABLE class="table table-striped table-bordered table-hover">
+				<TBODY>
+					<thead>
+						<tr>
+							<th colspan="8" align="center" bgcolor="#5090c1">详细信息</th>
+						</tr>
+					</thead>
+					<TR>
+						<TD class="tdstyle3">姓名</TD>
+						<TD class="tdstyle4" colspan="2">{{record.name}}</TD>
+						<TD class="tdstyle3">编号</TD>
+						<TD class="tdstyle4" colspan="2">{{record.healthFileNumber }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">体检日期</TD>
+						<TD class="tdstyle4" colspan="2">{{record.examinationDate }}</TD>
+						<TD class="tdstyle3">责任医生</TD>
+						<TD class="tdstyle4" colspan="2">{{record.responsibleDoctorName }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">内容</TD>
+						<TD class="tdstyle3" style="text-align: center;" colspan="5">
+							检查项目</TD>
+					</TR>
+					<TR id="symptom">
+						<TD class="tdstyle3">症状</TD>
+						<TD class="tdstyle4" colspan="5"><SPAN
+							style="margin-right: 3px;">{{record.symptomCodes  }}</SPAN><BR><SPAN
+								style="margin-right: 3px;">{{record.symptomOther }}</SPAN><BR></TD>
+					</TR>
+					<TR id="generalcondition">
+						<TD class="tdstyle3" rowspan="8">一般状况</TD>
+						<TD class="tdstyle3">体温(℃)</TD>
+						<TD class="tdstyle4">{{record.temperature }}</TD>
+						<TD class="tdstyle3">脉率(次/分钟)</TD>
+						<TD class="tdstyle4" colspan="2">{{record.pulseRate }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3" rowspan="2">呼吸频率(次/分钟)</TD>
+						<TD class="tdstyle4" rowspan="2">{{record.respiratoryRate }}</TD>
+						<TD class="tdstyle3" rowspan="2">血压(mmHg)</TD>
+						<TD class="tdstyle3">左侧</TD>
+						<TD class="tdstyle4">{{record.leftSBP}}/{{record.leftDBP  }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">右侧</TD>
+						<TD class="tdstyle4">{{record.rightSBP}}/{{record.rightDBP }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">身高(cm)</TD>
+						<TD class="tdstyle4">{{record.height }}</TD>
+						<TD class="tdstyle3">体重(kg)</TD>
+						<TD class="tdstyle4" colspan="2">{{record.weight }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">腰围(cm)</TD>
+						<TD class="tdstyle4">{{record.waistline }}</TD>
+						<TD class="tdstyle3">体质指数</TD>
+						<TD class="tdstyle4" colspan="2">{{record.bmi }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">臀围(cm)</TD>
+						<TD class="tdstyle4">{{record. }}</TD>
+						<TD class="tdstyle3">腰臀围比值</TD>
+						<TD class="tdstyle4" colspan="2">{{record. }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">老年人认知功能</TD>
+						<TD class="tdstyle4" colspan="4">{{record.cognitiveFunction }} <SPAN
+							style="padding-left: 15px;">{{record.cognitiveFunctionScore }} </SPAN>
+						</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">老年人情感状态</TD>
+						<TD class="tdstyle4" colspan="4">{{record.emotionalState }} <SPAN
+							style="padding-left: 15px;">{{record.emotionalStateScore }} </SPAN>
+						</TD>
+					</TR>
+					<TR id="lifestyle">
+						<TD class="tdstyle3" rowspan="14">生活方式</TD>
+						<TD class="tdstyle3" rowspan="2">体育锻炼</TD>
+						<TD class="tdstyle3">锻炼频率</TD>
+						<TD class="tdstyle4">{{record.exerciseFrequencyCode }}</TD>
+						<TD class="tdstyle3">每次锻炼时间(分钟)</TD>
+						<TD class="tdstyle4">{{record.everyWorkoutTime }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">坚持锻炼时间(年)</TD>
+						<TD class="tdstyle4">{{record.insistOnExerciseTime }}</TD>
+						<TD class="tdstyle3">锻炼方式</TD>
+						<TD class="tdstyle4">{{record.exerciseMode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">饮食习惯</TD>
+						<TD class="tdstyle4" colspan="4"><SPAN
+							style="margin-right: 3px;">{{record.eatingHabitsCodes }}</SPAN><BR><SPAN
+								style="margin-right: 3px;">{{record.eatingHabitsCodes }}</SPAN><BR></TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3" rowspan="2">吸烟情况</TD>
+						<TD class="tdstyle3">吸烟状况</TD>
+						<TD class="tdstyle4">{{record.smokingStatusCode }}</TD>
+						<TD class="tdstyle3">日吸烟量(支)</TD>
+						<TD class="tdstyle4">{{record.dailySmoking }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">开始吸烟年龄(岁)</TD>
+						<TD class="tdstyle4">{{record.smokingAge }}</TD>
+						<TD class="tdstyle3">戒烟年龄(岁)</TD>
+						<TD class="tdstyle4">{{record.smokingCessationAge }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3" rowspan="4">饮酒情况</TD>
+						<TD class="tdstyle3">饮酒频率</TD>
+						<TD class="tdstyle4">{{record.drinkingFrequencyCode }}</TD>
+						<TD class="tdstyle3">日饮酒量(两)</TD>
+						<TD class="tdstyle4">{{record.dailyDrinking }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">是否戒酒</TD>
+						<TD class="tdstyle4">{{record.temperanceCode }}</TD>
+						<TD class="tdstyle3">戒酒年龄(岁)</TD>
+						<TD class="tdstyle4">{{record.temperanceAge }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">开始饮酒年龄(岁)</TD>
+						<TD class="tdstyle4">{{record.drinkingAge }}</TD>
+						<TD class="tdstyle3">近一年属否醉酒</TD>
+						<TD class="tdstyle4">{{record.whetherDrunk }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">饮酒种类</TD>
+						<TD class="tdstyle4" colspan="4">{{record.alcoholTypeCodes }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3" rowspan="5">职业暴露情况</TD>
+						<TD class="tdstyle3">暴露标志</TD>
+						<TD class="tdstyle4" colspan="3">{{record.exposureStateCode }} <SPAN
+							style="padding-left: 15px;">具体职业: {{record.hazardousWork }} </SPAN> <SPAN
+							style="padding-left: 15px;">从业时间(年): {{record.workingTime }}</SPAN>
+						</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3" rowspan="4">毒物种类</TD>
+						<TD class="tdstyle3">化学品</TD>
+						<TD class="tdstyle4" colspan="2">{{record.chemistry }}<SPAN
+							style="padding-left: 15px;">防护措施: {{record.chemistryProtective }} </SPAN>
+						</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">毒物-粉尘</TD>
+						<TD class="tdstyle4" colspan="2">{{record.dust }} <SPAN
+							style="padding-left: 15px;">防护措施: {{record.dustProtective }} </SPAN>
+						</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">毒物-物理因素</TD>
+						<TD class="tdstyle4" colspan="2">{{record.physical }} <SPAN
+							style="padding-left: 15px;">防护措施: {{record.physicalProtective }} </SPAN>
+						</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">射线</TD>
+						<TD class="tdstyle4" colspan="2">{{record.radiogen }} <SPAN
+							style="padding-left: 15px;">防护措施: {{record.radiogenProtective }} </SPAN>
+						</TD>
+					</TR>
+					<TR id="medicine">
+						<TD class="tdstyle3" rowspan="4">脏器功能</TD>
+						<TD class="tdstyle3">口腔</TD>
+						<TD class="tdstyle4" colspan="4">口唇:{{record.dentitionCodes  }}<BR> 齿列:<FONT
+								color="red">{{record.dentitionCodes   }}</FONT><BR> 咽部:{{record.throatCode  }} </TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">视力</TD>
+						<TD class="tdstyle4" colspan="4"><SPAN
+							style="padding-right: 15px;">左眼: {{record.visionLeft  }} </SPAN> <SPAN
+							style="padding-right: 15px;">右眼: {{record.visionRight  }} </SPAN> <SPAN
+							style="padding-right: 15px;">左眼矫正: {{record.redressVisionLeft }} </SPAN> <SPAN>右眼矫正:{{record.redressVisionRight  }}
+								 </SPAN></TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">听力</TD>
+						<TD class="tdstyle4" colspan="4">{{record.hearingCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">运动功能</TD>
+						<TD class="tdstyle4" colspan="4">{{record.motorFunctionCode }}</TD>
+					</TR>
+					<TR id="examresult">
+						<TD class="tdstyle3" rowspan="18">查体</TD>
+						<TD class="tdstyle3">皮肤</TD>
+						<TD class="tdstyle4" colspan="4">{{record.skinCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">巩膜</TD>
+						<TD class="tdstyle4" colspan="4">{{record.scleraCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">淋巴结</TD>
+						<TD class="tdstyle4" colspan="4">{{record.lymphNodeCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3" rowspan="3">肺</TD>
+						<TD class="tdstyle4" colspan="4">桶状胸: {{record.barrelChestCode  }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle4" colspan="4">呼吸音: {{record.breathSoundCode  }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle4" colspan="4">罗音: {{record.raleCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">心脏</TD>
+						<TD class="tdstyle4" colspan="4"><SPAN
+							style="padding-right: 15px;">心率(次/分钟): {{record.heartRate }}</SPAN> <SPAN
+							style="padding-right: 15px;">心律: {{record.rhythmCode  }} </SPAN> <SPAN>杂音: {{record.cardiacSouffleCode }}
+						</SPAN></TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">腹部</TD>
+						<TD class="tdstyle4" colspan="4">
+							<DIV style="padding-right: 15px;">压痛: {{record.abdomenTendernessDesc  }}</DIV>
+							<DIV style="padding-right: 15px;">包块: {{record.abdomenMassCode  }}</DIV>
+							<DIV style="padding-right: 15px;">肝大: {{record.abdomenLiverCode  }}</DIV>
+							<DIV style="padding-right: 15px;">脾大: {{record.abdomenSplenomegalyCode  }}</DIV>
+							<DIV style="padding-right: 15px;">移动性浊音: {{record.abdomenShiftingDullnessCode }}</DIV>
+						</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">下肢水肿</TD>
+						<TD class="tdstyle4" colspan="4">{{record.legEdemaCode  }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">足背动脉搏动</TD>
+						<TD class="tdstyle4" colspan="4">{{record.dorsalisPedisPulseCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">肛门指诊</TD>
+						<TD class="tdstyle4" colspan="4">{{record.analFingerCodes }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">乳腺</TD>
+						<TD class="tdstyle4" colspan="4">{{record.breastCodes }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3" rowspan="5">妇科</TD>
+						<TD class="tdstyle3">外阴</TD>
+						<TD class="tdstyle4" colspan="3">{{record.vulvaCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">阴道</TD>
+						<TD class="tdstyle4" colspan="3">{{record.vaginaCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">宫颈</TD>
+						<TD class="tdstyle4" colspan="3">{{record.cervixCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">宫体</TD>
+						<TD class="tdstyle4" colspan="3">{{record.uterusCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">附件</TD>
+						<TD class="tdstyle4" colspan="4">{{record.uterineAccessoriesCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">其他</TD>
+						<TD class="tdstyle4" colspan="3">{{record.examinationOther }}</TD>
+					</TR>
+					<TR id="assist">
+						<TD class="tdstyle3" rowspan="16">辅助检查</TD>
+						<TD class="tdstyle3">空腹血糖</TD>
+						<TD class="tdstyle4" colspan="4"><SPAN
+							style="padding-right: 15px;">{{record.fastingPlasmaGlucose1 }}</SPAN> 或 <SPAN
+							style="padding-left: 15px;">{{record.fastingPlasmaGlucose2 }}</SPAN></TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">血常规</TD>
+						<TD class="tdstyle4" colspan="4"><SPAN
+							style="padding-right: 15px;"> 血红蛋白(g/L):{{record.hemoglobin    }} </SPAN> <SPAN
+							style="padding-right: 15px;">白细胞(/L):{{record.leucocyte }} </SPAN> <SPAN
+							style="padding-right: 15px;">血小板(/L):{{record.platelet }} </SPAN> <SPAN
+							style="padding-right: 15px;">其他:{{record.bloodOther }} </SPAN></TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">尿常规</TD>
+						<TD class="tdstyle4" colspan="4"><SPAN
+							style="padding-right: 15px;"> 尿蛋白:{{record.urineProteinCode }} </SPAN> <SPAN
+							style="padding-right: 15px;"> 尿糖:{{record.urineSugarCode }} </SPAN> <SPAN
+							style="padding-right: 15px;">尿酮体:{{record.urineKetoneCode }} </SPAN> <SPAN
+							style="padding-right: 15px;">尿潜血:{{record.urineOccultBloodCode }} </SPAN> <SPAN
+							style="padding-right: 15px;"> 其他:{{record.urineOther }} </SPAN></TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">尿微量白蛋白(mg/dL)</TD>
+						<TD class="tdstyle4" colspan="4">{{record.urineTraceAlbuminCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">大便潜血</TD>
+						<TD class="tdstyle4" colspan="4">{{record.fecalOccultBloodCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">肝功能</TD>
+						<TD class="tdstyle4" colspan="4"><SPAN
+							style="padding-right: 15px;"> 血清谷丙转氨酶(U/L):{{record.GPT }} </SPAN> <SPAN
+							style="padding-right: 15px;">血清谷草转氨酶(U/L):{{record.GOT }} </SPAN> <SPAN
+							style="padding-right: 15px;">白蛋白(g/L):{{record.albumin }} </SPAN> <SPAN
+							style="padding-right: 15px;">总胆红素(μmol/L):{{record.TBIL }} </SPAN> <SPAN
+							style="padding-right: 15px;">结合胆红素(μmol/L):{{record.DBIL }} </SPAN></TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">肾功能</TD>
+						<TD class="tdstyle4" colspan="4"><SPAN
+							style="padding-right: 15px;"> 血清肌酐(μmol/L):{{record.serumCreatinine }} </SPAN> <SPAN
+							style="padding-right: 15px;">血尿素氮(mmol/L):{{record.BUN }} </SPAN> <SPAN
+							style="padding-right: 15px;">血钾浓度(mmol/L):{{record.serumPotassiumConcentration }} </SPAN> <SPAN
+							style="padding-right: 15px;">血钠浓度(mmol/L):{{record.serumSodiumConcentration }} </SPAN></TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">血脂</TD>
+						<TD class="tdstyle4" colspan="4"><SPAN
+							style="padding-right: 15px;"> 总胆固醇(mmol/L):{{record.TCHO }} </SPAN> <SPAN
+							style="padding-right: 15px;">甘油三酯(mmol/L):{{record.triglyceride }} </SPAN> <SPAN
+							style="padding-right: 15px;">血清低密度脂蛋白胆固醇(mmol/L):{{record.LDL }} </SPAN> <SPAN
+							style="padding-right: 15px;">血清高密度脂蛋白胆固醇(mmol/L):{{record.HDL }} </SPAN></TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">糖化血红蛋白(%)</TD>
+						<TD class="tdstyle4" colspan="4">{{record.glycatedHemoglobin }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">乙型肝炎表面抗原*</TD>
+						<TD class="tdstyle4" colspan="4">{{record.HBsAgCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">眼底</TD>
+						<TD class="tdstyle4" colspan="4">{{record.fundusCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">心电图</TD>
+						<TD class="tdstyle4" colspan="4">{{record.ECGCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">胸部X线片</TD>
+						<TD class="tdstyle4" colspan="4">{{record.chestXRayCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">B超</TD>
+						<TD class="tdstyle4" colspan="4">{{record.BScanDesc }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">宫颈涂片</TD>
+						<TD class="tdstyle4" colspan="4">{{record.papSmearCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">其他</TD>
+						<TD class="tdstyle4" colspan="4">{{record.checkOther }}</TD>
+					</TR>
+					<TR id="tcm" name="tcm">
+						<TD class="tdstyle3" rowspan="9">中医体质辨识</TD>
+						<TD class="tdstyle3">平和质</TD>
+						<TD class="tdstyle4" colspan="4">{{record.flatAndQualityCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">气虚质</TD>
+						<TD class="tdstyle4" colspan="4">{{record.qiDeficiencyCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">阳虚质</TD>
+						<TD class="tdstyle4" colspan="4">{{record.yangXuzhiCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">阴虚质</TD>
+						<TD class="tdstyle4" colspan="4">{{record.yinDeficiencyCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">痰湿质</TD>
+						<TD class="tdstyle4" colspan="4">{{record.phlegmDampnessQualityCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">湿热质</TD>
+						<TD class="tdstyle4" colspan="4">{{record.hotAndHumidQualityCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">血瘀质</TD>
+						<TD class="tdstyle4" colspan="4">{{record.bloodStasisCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">气郁质</TD>
+						<TD class="tdstyle4" colspan="4">{{record.qiStagnationCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">特秉质</TD>
+						<TD class="tdstyle4" colspan="4">{{record.specialQualityCode }}</TD>
+					</TR>
+					<TR id="healthproblem">
+						<TD class="tdstyle3" rowspan="7">现存主要健康问题</TD>
+						<TD class="tdstyle3">脑血管疾病</TD>
+						<TD class="tdstyle4" colspan="4">{{record.cerebrovascularCodes }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">肾脏疾病</TD>
+						<TD class="tdstyle4" colspan="4">{{record.kidneyDiseaseCodes }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">心脏疾病</TD>
+						<TD class="tdstyle4" colspan="4">{{record.heartDiseaseCodes }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">血管疾病</TD>
+						<TD class="tdstyle4" colspan="4">{{record.vascularDiseaseCodes }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">眼部疾病</TD>
+						<TD class="tdstyle4" colspan="4">{{record.eyeDiseaseCodes }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">神经系统疾病</TD>
+						<TD class="tdstyle4" colspan="4">{{record.nerveSystemDiseaseCode }}</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">其他系统疾病</TD>
+						<TD class="tdstyle4" colspan="4">{{record.otherSystemDiseaseCode }}</TD>
+					</TR>
+					<TR id="inhs">
+						<TD class="tdstyle3" rowspan="2">住院治疗情况</TD>
+						<TD class="tdstyle3">住院史</TD>
+						<TD class="tdstyle4" colspan="4">
+							{% for hospitalizedHistory in hospitalizedHistory_list %}
+							<SPAN	style="margin-right: 3px;">{{hospitalizedHistory.admissionDate  }} 、&nbsp;{{hospitalizedHistory.reason}}、&nbsp;{{hospitalizedHistory.orgName }}</SPAN><BR>
+							{% endfor %}
+						</TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3">家庭病床史</TD>
+						<TD class="tdstyle4" colspan="4">
+						{% for familyBedHistory in familyBedHistory_list%}
+						<SPAN 	style="margin-right: 3px;">{{familyBedHistory.admissionDate }}、&nbsp;{{familyBedHistory.reason}}、&nbsp;{{familyBedHistory.orgName }}</SPAN><BR>
+						{% endfor %}
+						</TD>
+					</TR>
+					<TR id="medications">
+						<TD class="tdstyle3" colspan="2">主要用药情况</TD>
+						<TD class="tdstyle4" colspan="4">
+					{% for medical in medicationList_list%}
+						<SPAN 	style="margin-right: 3px;">{{medical.drugName }}</SPAN><BR>
+						{% endfor %}
+
+						</TD>
+					</TR>
+					<TR id="vaccinate">
+						<TD class="tdstyle3" colspan="2">非免疫规划预防接种史</TD>
+						<TD class="tdstyle4" colspan="4">
+						{% for vaccinationHistory in vaccinationHistory_list %}
+							<SPAN	style="margin-right: 3px;">接种名称:&nbsp;{{vaccinationHistory.inoculationName }}
+							接种日期:&nbsp;{{vaccinationHistory.inoculationDate }}
+							接种机构名称:&nbsp;{{vaccinationHistory.orgName }}
+							</SPAN><BR>
+							{% endfor %}
+						</TD>
+					</TR>
+					<TR id="healthevaluation" name="healthevaluation">
+						<TD class="tdstyle3" colspan="2">健康评价</TD>
+						<TD class="tdstyle4" colspan="4">
+							<DIV>是否异常: {{record.healthEvaluationCode }}</DIV>
+							<DIV>
+								异常描述: <SPAN style="margin-right: 3px;">{{record.diseaseName1  }}</SPAN><BR>
+								 <SPAN style="margin-right: 3px;">{{record.diseaseName2  }}</SPAN><BR>
+								 <SPAN style="margin-right: 3px;">{{record.diseaseName3  }}</SPAN><BR>
+								 <SPAN style="margin-right: 3px;">{{record.diseaseName4  }}</SPAN><BR>
+								
+							</DIV>
+						</TD>
+					</TR>
+					<TR id="healthguidance" name="healthguidance">
+						<TD class="tdstyle3" colspan="2">健康指导</TD>
+						<TD class="tdstyle4" colspan="4"><SPAN
+							style="margin-right: 3px;">1&nbsp;、{{record.healthGuidanceCodes }}</SPAN><BR></TD>
+					</TR>
+					<TR>
+						<TD class="tdstyle3" colspan="2">危险因素控制</TD>
+						<TD class="tdstyle4" colspan="4"><SPAN
+							style="margin-right: 3px;">1&nbsp;、{{record.riskFactorsCodes }}</SPAN><BR></TD>
+					</TR>
+				</TBODY>
+			</TABLE>
+
+
+
+			<table class="margin-bottom-20 table  no-border">
+				<tr>
+					<td class="text-center"><input type="button" value="确定"
+						class="btn btn-info " style="width: 80px;" onclick="history.go(-1)"/></td>
+				</tr>
+			</table>
+
+
+
+
+
+{% endblock %} 

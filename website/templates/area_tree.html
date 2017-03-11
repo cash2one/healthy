@@ -1,0 +1,213 @@
+<script type="text/javascript">
+	$(function() {
+		$('#files').tree({
+			expanded : 'li:first'
+		});
+	});
+</script>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 12px;
+}
+
+label {
+	display: inline-block;
+}
+
+a, img {
+	border: 0;
+	display: inline-block;
+}
+
+#files {
+	margin: 10% auto;
+	width: 400px;
+}
+
+.tree, .tree ul, .tree li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	zoom: 1;
+}
+
+.tree ul {
+	margin-left: 8px;
+}
+
+.tree li a {
+	color: #555;
+	padding: .1em 7px .1em 27px;
+	display: block;
+	text-decoration: none;
+	border: 1px dashed #fff;
+	background: url(/static/img/icon-file.gif) 5px 50% no-repeat;
+}
+
+.tree li a.tree-parent {
+	background: url(/static/img/icon-folder-open.gif) 5px 50% no-repeat;
+}
+
+.tree li a.tree-parent-collapsed {
+	background: url(/static/img/icon-folder.gif) 5px 50% no-repeat;
+}
+
+.tree li a:hover, .tree li a.tree-parent:hover, .tree li a:focus, .tree li a.tree-parent:focus,
+	.tree li a.tree-item-active {
+	color: #000;
+	border: 1px solid #eee;
+	background-color: #fafafa;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.tree li a:focus, .tree li a.tree-parent:focus, .tree li a.tree-item-active
+	{
+	border: 1px solid #e2f3fb;
+	background-color: #f2fafd;
+}
+
+.tree ul.tree-group-collapsed {
+	display: none;
+}
+</style>
+<div style="height: 40px; background: #5090c1;"></div>
+
+<!-- 这是 四个参数的树，无法循环展开'arealist0':arealist0,'arealist1':arealist1,'arealist2':arealist2,'arealist3':arealist3,-->
+<ul style="margin-top: 2%;" id="files">
+{% if arealist0 %}
+	<li><a href="javascript:void(0);"
+		style="cursor: Default; display: inline-block;">机构维护&nbsp;<label
+			style="color: blue; cursor: pointer" href="#modal-container-C"
+			data-toggle="modal" a_parentcode="00000" onclick="onClickC(this)"></label></a>
+		<ul>
+			{% for city in arealist0 %}
+			<li><a href="javascript:void(0);"
+				style="cursor: Default; display: inline-block;"
+				a_areaCode={{city.areaCode}} a_areaName={{city.areaName}}
+				a_areaType={{city.areaType}} onclick="onClick(this)">{{city.areaName}}&nbsp;|<label
+					style="color: blue; cursor: pointer"
+					href="#modal-container-C" data-toggle="modal"
+					a_parentcode={{city.areaCode}} onclick="onClickC(this)">新建区/县</label>|
+			</a>
+				<ul>
+					{% for country in arealist1 %} {% ifequal country.parentAreaCode city.areaCode %}
+
+					<li><a href="javascript:void(0);"
+						style="cursor: Default; display: inline-block;"
+						a_areaCode={{country.areaCode}} a_areaName={{country.areaName}} 
+						a_areaType={{country.areaType}} onclick="onClick(this)">{{country.areaName}}&nbsp;|<label
+							style="display: inline-block; text-decoration: none; color: blue; cursor: pointer"
+							href="#modal-container-C" data-toggle="modal"
+							a_parentcode={{country.areaCode}} onclick="onClickC(this)">新建乡/镇</label>|
+					</a>
+						<ul>
+							{% for town in arealist2 %}{% ifequal town.parentAreaCode 	country.areaCode %}
+
+							<li><a href="javascript:void(0);"
+								style="cursor: Default; display: inline-block;"
+								a_areaCode={{town.areaCode}} a_areaName={{town.areaName}}
+								a_areaType={{town.areaType}} onclick="onClick(this)">{{town.areaName}}&nbsp;|<label
+									style="text-decoration: none; color: blue; cursor: pointer"
+									href="#modal-container-C" data-toggle="modal"
+									a_parentcode={{town.areaCode}} onclick="onClickC(this)">新建村</label>|
+							</a>
+								<ul>
+									{% for village in arealist3 %} {% ifequal village.parentAreaCode town.areaCode %}
+
+									<li><a href="javascript:void(0);" style="cursor: Default"
+										a_areaCode={{village.areaCode}}
+										a_areaName={{village.areaName}}
+										a_areaType={{village.areaType}} onclick="onClick(this)">{{village.areaName}}</a>
+
+									</li>  {% endifequal %}{% endfor %}
+								</ul>
+								</li>
+								  {% endifequal %}{% endfor %}
+						</ul>
+						</li> 
+						{% endifequal %} {% endfor %}
+				</ul>
+				</li>
+				{% endfor %}
+		</ul> 
+		</li>
+{% elif arealist1 %}
+<li>
+<a href="javascript:void(0);"
+		style="cursor: Default; display: inline-block;">机构维护&nbsp;<label
+			style="color: blue; cursor: pointer" href="#modal-container-C"
+			data-toggle="modal" a_parentcode="00000" onclick="onClickC(this)"></label></a>
+	<ul>
+		{% for country in arealist1 %} 
+		<li><a href="javascript:void(0);"
+			   style="cursor: Default; display: inline-block;"
+			   a_areaCode={{country.areaCode}} a_areaName={{country.areaName}} 
+						a_areaType={{country.areaType}} onclick="onClick(this)">{{country.areaName}}&nbsp;|<label
+							style="display: inline-block; text-decoration: none; color: blue; cursor: pointer"
+							href="#modal-container-C" data-toggle="modal"
+							a_parentcode={{country.areaCode}} onclick="onClickC(this)">新建乡/镇</label>|
+					</a>
+						<ul>
+							{% for town in arealist2 %} {% ifequal town.parentAreaCode 	country.areaCode %}
+							<li><a href="javascript:void(0);"
+								style="cursor: Default; display: inline-block;"
+								a_areaCode={{town.areaCode}} a_areaName={{town.areaName}}
+								a_areaType={{town.areaType}} onclick="onClick(this)">{{town.areaName}}&nbsp;|<label
+								style="text-decoration: none; color: blue; cursor: pointer"
+								href="#modal-container-C" data-toggle="modal"
+								a_parentcode={{town.areaCode}} onclick="onClickC(this)">新建村</label>|
+							</a>
+								<ul>
+									{% for village in arealist3 %} {% ifequal village.parentAreaCode town.areaCode %}
+									<li><a href="javascript:void(0);" style="cursor: Default"
+										a_areaCode={{village.areaCode}}
+										a_areaName={{village.areaName}}
+										a_areaType={{village.areaType}} onclick="onClick(this)">{{village.areaName}}</a>
+
+									</li> {% endifequal %}  {% endfor %}
+								</ul>
+								</li>
+								 {% endifequal %}  {% endfor %}
+						</ul>
+						</li> 
+		{% endfor %}
+	</ul>
+</li>
+{% elif arealist2 %}
+<li>
+<a href="javascript:void(0);"
+		style="cursor: Default; display: inline-block;">机构维护&nbsp;<label
+			style="color: blue; cursor: pointer" href="#modal-container-C"
+			data-toggle="modal" a_parentcode="00000" onclick="onClickC(this)"></label></a>
+	<ul>
+				{% for town in arealist2 %} 
+				<li><a href="javascript:void(0);"
+								style="cursor: Default; display: inline-block;"
+								a_areaCode={{town.areaCode}} a_areaName={{town.areaName}}
+								a_areaType={{town.areaType}} onclick="onClick(this)">{{town.areaName}}&nbsp;|<label
+								style="text-decoration: none; color: blue; cursor: pointer"
+								href="#modal-container-C" data-toggle="modal"
+								a_parentcode={{town.areaCode}} onclick="onClickC(this)">新建村</label>|
+							</a>
+								<ul>
+									{% for village in arealist3 %} {% ifequal village.parentAreaCode town.areaCode %}
+									<li><a href="javascript:void(0);" style="cursor: Default"
+										a_areaCode={{village.areaCode}}
+										a_areaName={{village.areaName}}
+										a_areaType={{village.areaType}} onclick="onClick(this)">{{village.areaName}}</a>
+
+									</li> {% endifequal %}  {% endfor %}
+								</ul>
+								</li>
+								  {% endfor %}
+				</ul>
+		</li> 
+{%endif%}
+
+</ul>
+

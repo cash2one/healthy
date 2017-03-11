@@ -1,0 +1,86 @@
+{% for org in orglist %}
+	
+<table class="table table-bordered" height="130px">
+	<tr bgcolor="#F1F1F1" align="center">
+		<td align="right" width="40%">医疗机构名称：</td>
+		<td  align="center">{{org.orgName}}</td>
+		
+	</tr>
+	<tr>
+		<td align="right">医疗机构编码：</td>
+		<td align="center">{{org.orgCode}}</td>
+	</tr>
+	<tr bgcolor="#F1F1F1">
+		<td align="right">医疗机构类型：</td>
+		<td  align="center">{{org.orgType}}</td>
+	</tr>
+</table>
+<div align="right" style="margin: 2%">
+	<input type="submit"  value="修改" class="btn btn-info" onclick="onClickD(this)" orgcode={{org.orgCode}} orgtype={{org.orgType}} orgname={{org.orgName}} 
+	areacode={{org.areaCode}} orglevelorder={{org.levelOrder}} orgpcode={{org.parentOrgCode|default:"&nbsp;"}} 
+							href="#modal-container-E" data-toggle="modal" 
+							style="height: 90%; width: 80px;" />
+					</div>
+					<!-- 此处orgcode是""或" "会引起错误 -->
+{% endfor %}
+<!-- 修改医疗机构页面 -->
+<div id="modal-container-E" class="modal hide fade" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true"
+	style="width: 30%; height: 40%; margin-right: 0px; top: 20%">
+	
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true">×</button>
+		<h3 id="myModalLabel">修改医疗机构信息</h3>
+	</div>
+
+	<div class="modal-body">
+		<form style="margin: 2%" method="post" id="area_org_modify">
+					{% csrf_token %}
+					<table class="table table-bordered"   height="150px">
+						<tr bgcolor="#F1F1F1">
+							<td align="right" width="40%">医疗机构名称：</td>
+	
+							<td ><input type="text" id="name_E"
+								style=" height:90%;width: 90%;" /></td>
+						</tr>
+						<tr>
+							<td  align="right" >医疗机构编码：</td>
+	
+							<td id="code_E"></td>
+						</tr>
+						<tr  bgcolor="#F1F1F1">
+							<td  align="right">医疗机构类型：</td>
+	
+							<td id="type_E"></td>
+	
+						</tr>
+						<tr >
+							<td  align="right">父机构编码：</td>
+	
+							<td id="pcode_E"></td>
+	
+						</tr>
+						<tr bgcolor="#F1F1F1">
+							<td  align="right" >医疗机构区域编码：</td>
+	
+							<td id="orgarea_E"></td>
+	
+						</tr>
+											<tr >
+							<td  align="right" >医疗机构levelOrder：</td>
+	
+							<td id="orglevel_E"></td>
+	
+						</tr>
+						
+					</table>
+					
+					<div class="modal-footer" style="height:20%;padding: 5px 5px 5px;" >
+						<input type="submit" id="submit_area_org_modify" value="保存修改" class="btn"/>
+					</div>
+				</form>
+	</div>
+
+</div>

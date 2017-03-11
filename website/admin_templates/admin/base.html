@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+{% load i18n admin_static %}
+
+{% block header %} 
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/css.css" />
+    <script type="text/javascript" src="/static/js/jquery1.9.0.min.js">
+    </script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript" src="/static/js/sdmenu.js">
+    </script>
+    <script type="text/javascript" src="/static/js/laydate/laydate.js">
+    </script>
+<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
+{% block extrastyle %}{% endblock %}
+{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
+{% block extrahead %}{% endblock %}
+{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+{% endblock%}
+
+{% block right_content %}
+
+	    <!-- Content -->
+
+        {% block pretitle %}{% endblock %}
+        {% block content_title %}
+        	{% if title %}
+        	<div class="title_right"><strong>{{ title }}</strong></div>
+			{% endif %}
+        {% endblock %}
+        {% block content %}
+        	{% block object-tools %}{% endblock %}
+        	{{ content }}
+        {% endblock %}
+        {% block sidebar %}{% endblock %}
+        <br class="clear" />
+  
+    <!-- END Content -->
+
+{% endblock %}

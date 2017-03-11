@@ -1,0 +1,118 @@
+{% extends 'base.html' %} {% block right_content %}
+
+<div class="title_right">
+	<strong>{{ key_name }}</strong>
+</div>
+
+
+<form method="post" id="form_ehr_query">
+	{% csrf_token %}
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th colspan="12" align="center">{{ key_name }}查询</th>
+			</tr>
+		</thead>
+
+		<tr>
+			<td colspan="1" align="right" bgcolor="#F1F1F1">户籍地址：</td>
+
+			<td colspan="2"><select name="liveaddr" id="select1" style="width: 90%">
+					<option value="">请选择</option> {% for each in area.arealist1%}
+					<option value={{each.areaCode}}>{{each.areaName}}</option> {% endfor %}
+			</select></td>
+
+			<td colspan="1" align="right" bgcolor="#F1F1F1">乡村街道：</td>
+
+			<td colspan="2" style="width: 17%"><select name="select2" id="select2" style="width: 90%">
+					<option value="">请选择</option> {% for each in area.arealist2%}
+					<option value={{each.areaCode}}>{{each.areaName}}</option> {% endfor %}
+			</select></td>
+
+			<td colspan="1" align="right" bgcolor="#F1F1F1">村/社区：</td>
+
+			<td colspan="2"><select name="select3" id="select3" style="width: 90%">
+					<option value="">请选择</option> {% for each in area.arealist3%}
+					<option value={{each.areaCode}}>{{each.areaName}}</option> {% endfor %}
+			</select></td>
+
+			<td colspan="1" align="right" bgcolor="#F1F1F1">检查机构：</td>
+
+			<td colspan="2"><select name="select4" id="select4" style="width: 90%">
+					<option value="">请选择</option> {% for each in area.orglist %}
+					<option value={{each.orgCode}}>{{each.orgName}}</option> {% endfor %}
+			</select></td>
+		</tr>
+
+		<tr>
+			<td colspan="1" align="right" bgcolor="#F1F1F1">姓名：</td>
+
+			<td colspan="2"><input type="text" name="" id="name" style="width: 90%" /></td>
+
+			<td colspan="1" align="right" bgcolor="#F1F1F1">性别：</td>
+
+			<td colspan="2">
+				<div style="width: 90%">
+					<input type="radio" name="sex" id="sex" value="1" checked="checked" />
+					男&#160;&#160;&#160;&#160; <input type="radio" name="sex" id="sex" value="2" /> 女
+				</div>
+			</td>
+
+			<td colspan="1" align="right" bgcolor="#F1F1F1">检查日期：</td>
+
+			<td colspan="2"><input type="text" class="laydate-icon " id="Calendar1" value="1970-01-01"
+				style="width: 90%" /></td>
+
+			<td colspan="1" align="right" bgcolor="#F1F1F1">至：</td>
+
+			<td colspan="2"><input type="text" class="laydate-icon " id="Calendar2" value="2016-01-21"
+				style="width: 90%" /></td>
+		</tr>
+
+		<tr>
+			<td colspan="1" align="right" bgcolor="#F1F1F1">身份证号：</td>
+
+			<td colspan="2"><input type="text" name="input1" id="input1" style="width: 90%;" /></td>
+
+			<td colspan="1" align="right" bgcolor="#F1F1F1">档案编号：</td>
+
+			<td colspan="2"><input type="text" name="input2" id="input2" style="width: 90%" /></td>
+			<td colspan="6"></td>
+		</tr>
+		<tr>
+			<td id="csrf_token" style="display:none;" >{{ csrf_token }}</td>
+		 </tr>
+
+
+	</table>
+	<div align="middle">
+		<input type="submit" id="submit" value="查询" class="btn btn-info" style="width: 80px;" />&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="/admin/website/tbhealthrecord/add/"> <input type="button" value="添加"
+			class="btn btn-info" style="width: 80px;" />
+		</a>
+	</div>
+
+</form>
+<div id="data"></div>
+<div id="pageplugin">
+	<ul class="pager">
+		<li><a id="firstpage" type="button" href="javascript:;"
+			data-pageurl="/YITJI/phy/list?menuid=36&amp;limit=10&amp;offset=0">首页</a></li>
+
+		<li><a id="prepage" type="button" href="javascript:;">上页</a></li>
+
+		<li><input id="pageinput" class="input-mini" type="text" data-pagelimit="10" data-pagenum="0"
+			data-pageurl="/YITJI/phy/list?menuid=36&amp;limit=10&amp;offset=" value="0/0"></li>
+
+		<li><a id="nextpage" type="button" href="javascript:;">下页</a></li>
+		<li><a id="lastpage" type="button" href="javascript:;">尾页</a></li>
+
+		<span style="margin-left: 20px; color: #075694;">共<span id='records_num'></span>条记录
+		</span>
+	</ul>
+</div>
+{% endblock %} {% block script_content %}
+<script type="text/javascript" src="/static/js/page_js/base.js"></script>
+<script type="text/javascript" src="/static/js/page_js/phy_list.js">
+</script>
+{% endblock %}

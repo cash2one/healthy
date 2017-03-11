@@ -1,0 +1,295 @@
+{% extends 'base.html' %} 
+{% block right_content %}
+<div class="title_right">
+			<strong>用户管理</strong>
+</div>
+<form method="post" id="form_ehr_query">
+        {% csrf_token %}
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th colspan="12" align="center">用户信息查询</th>
+					</tr>
+				</thead>
+
+ 
+
+            <td colspan="1"  align="right" bgcolor="#F1F1F1">
+              输入查询条件
+            </td>
+
+            <td colspan="2" >
+              <input type="text" name="input2" id="input2" style="width: 90%" />
+            </td>
+            <td colspan="6" >
+              <div align="middle">
+   			  <input  type="submit" id="submit" value="查询" class="btn btn-info" style="width: 80px;" />&nbsp;&nbsp;&nbsp;&nbsp;
+            	
+            </div>
+            </td>
+
+
+  
+         
+			</table>
+			
+			
+</form>
+	
+<table class="table table-striped table-bordered table-hover" style="table-layout: fixed;">
+				<thead>
+					<tr>
+						<th colspan="6" align="center"
+							style="background-color: #5090c1; color: white">用户信息列表</th>
+					</tr>
+				</thead>
+
+				<thead>
+					<tr>
+						<th>用户ID</th>
+						<!-- class="border_right wid100" -->
+						<th>姓名</th>
+						<th>性别</th>
+						<th>所属机构</th>
+						<th>角色</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+<tbody id="data">
+<tr>
+  <td nowrap="nowrap" style="overflow: hidden; text-overflow: ellipsis;" title='36068100200521000010'>
+    {{record.healthFileNumber}}
+  </td>
+
+  <td nowrap="nowrap" style="overflow: hidden; text-overflow: ellipsis;" title='赵斌斌'>
+    {{record.name}}
+  </td>
+
+  <td nowrap="nowrap" style="overflow: hidden; text-overflow: ellipsis;" title='男'>
+     {{record.genderCode}}
+  </td>
+
+  <td nowrap="nowrap" style="overflow: hidden; text-overflow: ellipsis;" title='1949-1-4'>
+     {{record.birthday}}
+  </td>
+
+  <td nowrap="nowrap" style="overflow: hidden; text-overflow: ellipsis;" title='2014-5-6'>
+     {{record.nowLiveAddr}}
+  </td>
+  
+  <td>
+  <!-- 此处的url必须要用全名，不知道是为什么  此时的record.healthFileNumber需要注意 ：可能会导致NoReverseMatch: Reverse for 'ehr_details' with arguments '('',)' and keyword arguments '{}' not found.-->
+  
+   
+  <label  href="#modal-container-973558-1"  data-toggle="modal" >分配角色</label>  
+
+  </td>
+</tr>
+
+
+</tbody>
+
+</table>
+
+<div  id="modal-container-973558-1"
+	            class="modal hide fade"
+	            role="dialog"
+	            aria-labelledby="myModalLabel"
+	            aria-hidden="true"
+	            style="width: 20%; height:30%; margin-left: -150px; top: 20%">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"> ×</button>
+		<h3 id="myModalLabel">分配角色</h3>
+	</div>
+
+	<div class="modal-body">
+		           <form method="post" id="form_ehr_query">
+				             {% csrf_token %}
+						<table class="table table-bordered">
+						 <tr>
+				            <td colspan="1"  align="right" bgcolor="#F1F1F1">
+				              登录名：
+				            </td>
+				
+				            <td colspan="2" >
+				              <input type="text" name="input1" id="input1" style="width: 90%;"/>
+				            </td>	
+				          </tr>
+						 <tr>
+				            <td colspan="1"  align="right" bgcolor="#F1F1F1">
+				              用户名：
+				            </td>
+				
+				            <td colspan="2" >
+				              <input type="text" name="input1" id="input1" style="width: 90%;"/>
+				            </td>	
+				          </tr>
+			          <tr>
+			            <td colspan="1" align="right" bgcolor="#F1F1F1"> 角色： </td>
+			
+			            <td colspan="1" >
+			              <select name="liveaddr" id="select1" style="width: 90%">
+			                <option value="">
+			                  请选择
+			                </option>
+			                {% for each in arealist1%}
+			                <option value={{each.areaCode}}>
+			                  {{each.areaName}}
+			                </option>
+			                {% endfor %}
+			              </select>
+			            </td>
+			
+			              </tr>
+			             </table>
+		           </form>
+		
+	          </div>
+
+	<div class="modal-footer">
+	            	<input  type="submit" id="submit" value="查询" class="btn btn-info" style="width: 80px;" />&nbsp;&nbsp;&nbsp;&nbsp;
+		            	<a  href="/admin/website/tbhealthrecord/add/">
+		              	<input type="button" value="添加" class="btn btn-info" style="width: 80px;" />
+		               </a>
+	          </div>
+
+</div>
+			
+
+<div id="pageplugin">
+				<ul class="pager">
+					<li><a id="firstpage" type="button"  href="javascript:;"
+						data-pageurl="/YITJI/phy/list?menuid=36&amp;limit=10&amp;offset=0">首页</a></li>
+						
+					<li><a id="prepage" type="button"  href="javascript:;">上页</a></li>
+			
+					<li><input id="pageinput" class="input-mini" type="text"
+						data-pagelimit="10" data-pagenum="2"
+						data-pageurl="/YITJI/phy/list?menuid=36&amp;limit=10&amp;offset="
+						value="1/2"></li>
+						
+					<li><a  id="nextpage" type="button" href="javascript:;">下页</a></li>
+					<li><a id="lastpage" type="button"  href="javascript:;">尾页</a></li>
+						
+					<span style="margin-left: 20px; color: #075694;">共<span id='records_num'></span>条记录
+					</span>
+				</ul>
+			</div>
+			
+
+
+{% endblock %} {% block script_content %}
+
+<script>
+/*	var page_number = 1;
+	var total_page = 1;
+	var nperpage=8;
+	!function() {
+		laydate.skin('molv');
+		laydate({
+			elem : '#Calendar1'
+		});
+		laydate({
+			elem : '#Calendar2'
+		});
+	}();
+	 function doquery(isadd)
+        {
+        		var liveaddr=$('#select1').val();
+        		var street=$('#select2').val();
+        		var community=$('#select3').val();
+        		var institution=$('#select4').val(); //第一行变量
+			    var name = $('#name').val();                //获得form中用户输入的name 注意这里的id_name 与你html中的id一致
+			     
+			    var date1 = $('#Calendar1').val();
+			    var date2 = $('#Calendar2').val(); //第二行变量
+			    var input1 = $('#input1').val();
+			    var input2 = $('#input2').val(); //第三行变量
+                var gender=$('#sex').val();
+                
+                var radio = document.getElementsByName("sex");
+                var radioLength = radio.length;
+                for(var i = 0;i < radioLength;i++)
+				   {
+				    if(radio[i].checked)
+				    {
+				     gender = radio[i].value;
+				    
+				    }
+				   }
+				  
+                $.ajax({
+                    type:"POST",
+                    data: {
+                  		 householdRegisterCode:liveaddr,street:street,community:community,registerOrgCode:institution,//#户籍地代码#建档单位编号
+            			 name:name, genderCode:gender, //#姓名#性别代码 
+             			 star:date1, end:date2,//#建档时间起止范围
+             			 personId:input1, healthFileNumber:input2,  //#居民身份证号#健康档案编号
+              			 page_n:page_number+isadd, nperpage:nperpage,},// 页码，每页的记录个数
+                    url: "{% url 'ehr_list_q' %}", //后台处理函数的url 这里用的是static url 需要与urls.py中的name一致
+                    cache: false,
+                    dataType: "json",
+                    success: function(result, statues, xml){
+                    	page_number = page_number+isadd;
+                    	total_records = result['number'];
+                    	total_page = Math.ceil(result['number']/nperpage);
+                    	var pg=page_number.toString()+'/'+total_page.toString();
+                    	document.getElementById("pageinput").value=pg;
+                    	
+                    	$('#records_num').html("\t"+total_records+"\t");
+                    	//alert(result['html'])
+                    	//alert(result['number'])
+                        $('#data').html(result['html'])                                        //成功时弹出view传回来的结果
+                    },
+                    error: function(){
+                        alert("false");
+                    }
+                });
+                return false;
+        }
+	
+	$(document).ready(function(){
+			$.ajax({
+			traditional: true//这个设置为true，data:{"steps":["qwe","asd","zxc"]}会转换成steps=qwe&steps=asd&...
+			});
+            $.ajaxSetup({
+                 data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+            });
+       		doquery(0);
+        	$('#form_ehr_query').submit(
+        	function(){
+        		page_number = 1;
+                return doquery(0);
+            }        
+            );
+             
+              $('#firstpage').click(
+        	function(){
+        		page_number=1
+                return doquery(0);
+            }        
+            );
+             $('#prepage').click(
+        	function(){
+        		if(page_number>1)
+                	return doquery(-1);
+            }        
+            );
+             $('#nextpage').click(
+        	function(){
+        		if(page_number<total_page)
+                	return doquery (1);
+            }        
+            );
+            $('#lastpage').click(
+        	function(){
+        		page_number=total_page
+                return doquery(0);
+            }        
+            );
+            
+        });
+           */ 
+</script>
+{%endblock%}

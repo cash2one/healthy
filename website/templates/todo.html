@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator"
+	content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>健康体检系统</title>
+<link rel="stylesheet" href="/static/css/bootstrap.css" />
+<link rel="stylesheet" href="/static/css/css.css" />
+<script type="text/javascript" src="/static/js/jquery1.9.0.min.js">
+	
+</script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js">
+	
+</script>
+<script type="text/javascript" src="/static/js/sdmenu.js">
+	
+</script>
+<script type="text/javascript" src="/static/js/laydate/laydate.js">
+	
+</script>
+</head>
+
+<body>
+	<div class="header">
+		<div class="logo">
+			<img src="/static/img/logo.png" />
+		</div>
+
+		<div class="header-right">
+			<a href="#">帮助</a> <a id="modal-973558"
+				href="#modal-container-973558" role="button" data-toggle="modal"
+				name="modal-973558">注销</a> <a href="#">开票员的工作平台</a> <a href="#">发送短信</a>
+
+			<div id="modal-container-973558" class="modal hide fade"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+				style="width: 300px; margin-left: -150px; top: 30%">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+
+					<h3 id="myModalLabel">注销系统</h3>
+				</div>
+
+				<div class="modal-body">
+					<p>您确定要注销退出系统吗？</p>
+				</div>
+
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+					<a class="btn btn-primary" style="line-height: 20px;"
+						href="%E7%99%BB%E5%BD%95.html">确定退出</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 顶部 -->
+
+	<div id="middle">
+		<div class="left">
+			<script type="text/javascript">
+				//<![CDATA[
+				var myMenu;
+				window.onload = function() {
+					myMenu = new SDMenu("my_menu");
+					myMenu.init();
+				};
+				//]]>
+			</script>
+
+			<div id="my_menu" class="sdmenu">
+				<div class="collapsed">
+					<span>基本公共卫生服务</span> <a href="/ehr_list">电子健康档案</a><a
+						href="/phy_list">电子健康档案</a> <a
+						href="/YITJI/hypet/list?limit=10&amp;offset=0&amp;menuid=11">
+						高血压随访记录 </a><a
+						href="/YITJI/mental/list?limit=10&amp;offset=0&amp;menuid=13">
+						重型精神疾病随访记录 </a><a
+						href="/YITJI/old/list?limit=10&amp;offset=0&amp;menuid=14">
+						老年人随访 </a><a
+						href="/YITJI/newbron/list?limit=10&amp;offset=0&amp;menuid=15">
+						新生儿访视记录 </a> <a
+						href="/YITJI/childbody/list?limit=10&amp;offset=0&amp;menuid=16">
+						儿童健康检查记录 </a> <a
+						href="/YITJI/prenatal/list?limit=10&amp;offset=0&amp;menuid=17">
+						产前随访记录 </a> <a
+						href="/YITJI/postpartum/list?limit=10&amp;offset=0&amp;menuid=18">
+						产后随访记录 </a> <a
+						href="/YITJI/postpartum42/list?limit=10&amp;offset=0&amp;menuid=19">
+						产后42天健康检查记录 </a> <a
+						href="/YITJI/diabet/list?limit=10&amp;offset=0&amp;menuid=25">
+						糖尿病随访 </a> <a href="/YITJI/jsp/infect/index.jsp?1=1&amp;menuid=45">
+						传染病报告 </a> <a href="/YITJI/jsp/vacc/index.jsp?1=1&amp;menuid=46">
+						预防接种卡 </a>
+
+				</div>
+				<div class="collapsed">
+					<span>统计分析 </span> <a
+						href="/YITJI/jsp/st/msIndex.jsp?1=1&amp;menuid=22">基本医疗服务</a> <a
+						href="#" class="dropdown-toggle">基本公共卫生服务</a> <a
+						href="/YITJI/jsp/st/machine.jsp?1=1&amp;menuid=28">一体机使用情况</a> <a
+						href="/YITJI/jsp/st/measure.jsp?1=1&amp;menuid=51">一体机功能使用</a> <a
+						href="/YITJI/jsp/st/device.jsp?1=1&amp;menuid=52">一体机设备质控</a> <a
+						href="/YITJI/jsp/st/bad/index.jsp?1=1&amp;menuid=74">异常数据分析</a>
+				</div>
+				<div class="collapsed">
+					<span>卫生资源管理</span> <a
+						href="/YITJI/jsp/resource/baseInfo.jsp?1=1&amp;menuid=24">辖区基本情况</a>
+					<a href="/YITJI/jsp/resource/msInfo.jsp?1=1&amp;menuid=26">医疗卫生资源情况</a>
+				</div>
+				<div class="collapsed">
+					<span>系统管理</span> <a
+						href="/YITJI/jsp/system/userManager.jsp?1=1&amp;menuid=7">用户管理</a>
+					<a href="/YITJI/jsp/system/roleManager.jsp?1=1&amp;menuid=8">角色管理</a>
+					<a href="/YITJI/org/manage?1=1&amp;menuid=47">机构管理</a> <a
+						href="/YITJI/dic/manage?1=1&amp;menuid=49">字典管理</a>
+				</div>
+
+				<div class="collapsed">
+					<span>一体机管理</span> <a
+						href="/YITJI/measure/queryList?limit=10&amp;offset=0&amp;menuid=20">一体机测量</a>
+					<a
+						href="/YITJI/yitiji/manage/queryMachineList?limit=10&amp;offset=0&amp;menuid=21">一体机设备管理</a>
+					<a href="/YITJI/jsp/yitiji/measure/list.jsp?1=1&amp;menuid=53">一体机功能使用情况</a>
+					<a href="/YITJI/jsp/yitiji/device/list.jsp?1=1&amp;menuid=54">一体机设备质控情况</a>
+				</div>
+
+				<div class="collapsed">
+					<span>健康体检</span> <a href="/phy_list">健康体检</a>
+				</div>
+				<div class="collapsed">
+					<span> 工作管理</span> <a
+						href="/YITJI/jsp/workmanage/remind.jsp?1=1&amp;menuid=39">随访计划提醒</a>
+					<a href="#" class="dropdown-toggle">工作计划</a> <a
+						href="/YITJI/jsp/workmanage/hypetwork.jsp?1=1&amp;menuid=41">高血压随访计划</a>
+					<a href="/YITJI/jsp/workmanage/diapetwork.jsp?1=1&amp;menuid=42">糖尿病随访计划</a>
+					<a href="/YITJI/jsp/workmanage/workload.jsp?1=1&amp;menuid=43">村医工作量</a>
+				</div>
+
+				<div class="collapsed">
+					<span>接口管理</span> <a href="/YITJI/hzgl/apply/page?1=1&amp;menuid=56">接口管理</a>
+				</div>
+
+				<div class="collapsed">
+					<span> 区域心电</span> <a
+						href="/YITJI/hzgl/apply/page?1=1&amp;menuid=56">患者信息</a> <a
+						href="/YITJI/jsp/qyxd/apply.jsp?1=1&amp;menuid=57">会诊申请</a> <a
+						href="/YITJI/hzgl/diag/page?1=1&amp;menuid=58">心电诊断</a> <a
+						href="/YITJI/hzgl/audit/page?1=1&amp;menuid=62">会诊审核</a> <a
+						href="/YITJI/diag/tmpl/page?1=1&amp;menuid=63">诊断模版</a> <a
+						href="/YITJI/jsp/qyxd/work.jsp?1=1&amp;menuid=64">工作提醒</a>
+				</div>
+
+				<div class="collapsed">
+					<span>心电专家</span> <a
+						href="/YITJI/jsp/expert/exlist.jsp?1=1&amp;menuid=60">专家管理</a> <a
+						href="/YITJI/jsp/expert/duty.jsp?1=1&amp;menuid=61">值班管理</a> <a
+						href="/YITJI/jsp/expert/zxf.jsp?1=1&amp;menuid=65">咨询费管理</a> <a
+						href="#" class="dropdown-toggle">统计分析</a> <a
+						href="/YITJI/jsp/expert/tjwork.jsp?1=1&amp;menuid=67">专家工作量统计</a>
+					<a href="/YITJI/jsp/expert/tjzxf.jsp?1=1&amp;menuid=68">专家咨询费统计</a>
+					<a href="/YITJI/jsp/expert/tjxd.jsp?1=1&amp;menuid=69">心电报告结论统计</a>
+				</div>
+				<div class="collapsed">
+					<span>健康教育管理 </span> <a
+						href="/YITJI/jsp/edu/health.jsp?1=1&amp;menuid=71">健康教育资料</a> <a
+						href="/YITJI/jsp/edu/plan.jsp?1=1&amp;menuid=72">健康教育计划</a> <a
+						href="/YITJI/jsp/edu/activity.jsp?1=1&amp;menuid=73">健康教育活动</a>
+				</div>
+				<div class="collapsed">
+					<span>耗材管理</span> <a
+						href="/YITJI/hcgl/apply/page?1=1&amp;menuid=76">采购管理</a> <a
+						href="/YITJI/hcgl/audit/page?1=1&amp;menuid=77">审核管理</a> <a
+						href="/YITJI/jsp/hcgl/stock/list.jsp?1=1&amp;menuid=78">库存管理</a></span>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="Switch"></div>
+		<script type="text/javascript">
+			$(document).ready(function(e) {
+				$(".Switch").click(function() {
+					$(".left").toggle();
+
+				});
+			});
+		</script>
+
+		{% block right_content %}
+		<div align ='left'><h1>功能未实现。</h1></div>
+		{% endblock %}
+	</div>
+	<!-- 底部 -->
+
+	<div id="footer">
+		版权所有：晶科客流 © 2015&#160;&#160;&#160;&#160;<a
+			href="http://www.mycodes.net/" target="_blank">源码之家</a>
+	</div>
+	{% block script_content %}
+	<script>
+		!function() {
+			laydate.skin('molv');
+			laydate({
+				elem : '#Calendar'
+			});
+			laydate.skin('molv');
+			laydate({
+				elem : '#Calendar2'
+			});
+		}();
+	</script>
+	{% endblock %}
+</body>
+</html>

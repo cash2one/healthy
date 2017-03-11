@@ -1,0 +1,366 @@
+{% extends 'base.html' %} {% block right_content %}
+<!--面板说明：(A)区域信息，(B)区域信息修改，(C)区域添加 ，(D)机构信息，(E)机构信息更改
+动作顺序进入页面刷新左侧树，左侧树的点击触发面板A和B信息改变，新建触发面板C的信息改变 并打开C
+点击左侧树还应该刷新机构信息列表-->
+<!-- 添加区域页面  -->
+<div id="modal-container-C" class="modal hide fade" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true"
+	style="width: 30%; height: 30%; margin-right: 0px; top: 20%">
+	
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true">×</button>
+		<h3 id="myModalLabel">添加区域</h3>
+	</div>
+
+	<div class="modal-body">
+		<form style="margin: 2%" method="post" id="area_area_add">
+					{% csrf_token %}
+					<table class="table table-bordered"   height="150px">
+						<tr>
+							<td  align="right" bgcolor="#F1F1F1">父机构编码：</td>
+	
+							<td id="parentcode_C"></td>
+						</tr>
+	
+						<tr>
+							<td align="right" bgcolor="#F1F1F1">机构名称：</td>
+	
+							<td ><input type="text" id="name_C"
+								style="height:90%;width: 90%;" /></td>
+						</tr>
+						<tr>
+							<td  align="right" bgcolor="#F1F1F1">机构编码：</td>
+	
+							<td ><input type="text" id="code_C" 
+								style="height:90%;width: 90%;" /></td>
+						</tr>
+						<tr>
+							<td  align="right"  bgcolor="#F1F1F1">机构类型：</td>
+	
+							<td ><input type="text" id="type_C"
+								style="height:90%;width: 90%;" /></td>
+	
+						</tr>
+					</table>
+					
+					<div class="modal-footer" style="height:20%;padding: 5px 5px 5px;" >
+						<input type="submit" id="submit" value="保存" class="btn"/>
+					</div>
+				</form>
+	</div>
+
+</div>
+
+<!-- 修改区域页面 -->
+<div id="modal-container-B" class="modal hide fade" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true"
+	style="width: 30%; height: 30%; margin-right: 0px; top: 20%">
+	
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true">×</button>
+		<h3 id="myModalLabel">修改区域信息</h3>
+	</div>
+
+	<div class="modal-body">
+		<form style="margin: 2%" method="post" id="area_area_modify">
+					{% csrf_token %}
+					<table class="table table-bordered"   height="150px">
+						<tr>
+							<td align="right" bgcolor="#F1F1F1" width="40%">机构名称：</td>
+	
+							<td ><input type="text" id="name_B"
+								style=" height:90%;width: 90%;" /></td>
+						</tr>
+						<tr>
+							<td  align="right" bgcolor="#F1F1F1">机构编码：</td>
+	
+							<td ><input type="text" id="code_B" old_codeB=""
+								style="height:90%;width: 90%;" /></td>
+						</tr>
+						<tr >
+							<td  align="right" bgcolor="#F1F1F1">机构类型：</td>
+	
+							<td ><input type="text" id="type_B"
+								style="height:90%;width: 90%;" /></td>
+	
+						</tr>
+					</table>
+					
+					<div class="modal-footer" style="height:20%;padding: 5px 5px 5px;" >
+						<input type="submit" id="submit_area_form_modify" value="保存" class="btn"/>
+					</div>
+				</form>
+	</div>
+
+</div>
+
+<!-- 修改医疗机构页面 -->
+<div id="modal-container-E" class="modal hide fade" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true"
+	style="width: 30%; height: 40%; margin-right: 0px; top: 20%">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true">×</button>
+		<h3 id="myModalLabel">修改医疗机构信息</h3>
+	</div>
+
+	<div class="modal-body">
+		<form style="margin: 2%" method="post" id="area_org_modify">
+					{% csrf_token %}
+					<table class="table table-bordered"   height="150px">
+						<tr bgcolor="#F1F1F1">
+							<td align="right" width="40%">医疗机构名称：</td>
+	
+							<td ><input type="text" id="name_E"
+								style=" height:90%;width: 90%;" /></td>
+						</tr>
+						<tr>
+							<td  align="right" >医疗机构编码：</td>
+	
+							<td id="code_E"></td>
+						</tr>
+						<tr  bgcolor="#F1F1F1">
+							<td  align="right">医疗机构类型：</td>
+	
+							<td id="type_E"></td>
+	
+						</tr>
+						<tr >
+							<td  align="right">父机构编码：</td>
+	
+							<td id="pcode_E"></td>
+	
+						</tr>
+						<tr bgcolor="#F1F1F1">
+							<td  align="right" >医疗机构区域编码：</td>
+	
+							<td id="orgarea_E"></td>
+	
+						</tr>
+											<tr >
+							<td  align="right" >医疗机构levelOrder：</td>
+	
+							<td id="orglevel_E"></td>
+	
+						</tr>
+						
+					</table>
+					
+					<div class="modal-footer" style="height:20%;padding: 5px 5px 5px;" >
+						<input type="submit" id="submit_area_org_modify" value="保存修改" class="btn"/>
+					</div>
+				</form>
+	</div>
+
+</div>
+
+<div class="title_right" >
+	<strong>机构管理</strong>
+</div>
+
+<div >
+	<!-- 左侧树状结构 -->
+	<div id="left_tree" 
+		style="height: 100%; width: 30%; float: left; border: 1px solid #38A3D5;">
+	</div>
+	<!-- 右侧区域/机构查看 -->
+	<div style="margin: 0%; margin-left: 1%; width: 35%; float: left;">
+		
+		<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		body {
+			background: #eee;
+			color: #333;
+		}
+		
+		a {
+			cursor: pointer;
+			color: #fff;
+			text-decoration: none;
+		}
+		
+		#header {
+			display: block;
+			height: 200px;
+			background: #7fcddd;
+			line-height: 100px;
+			text-align: center;
+			color: #fff;
+			font-size: 16px;
+			text-shadow: 0px -1px 0px rgba(30, 30, 30, 0.60);
+		}
+		
+		#header h3 {
+			font-size: 50px;
+			font-weight: 600;
+			height: 120px;
+			line-height: 120px;
+		}
+		
+		#header h4 {
+			font-size: 18px;
+			font-weight: 600;
+			height: 80px;
+			line-height: 80px;
+		}
+		
+		#box {
+			width: 980px;
+			margin: 60px auto;
+			height: 2600px;
+			background: #eee;
+		}
+		
+		#mynav {
+			width: 100%;
+			height: 40px;
+			background: #fff;
+			border-bottom: 1px solid #fff;
+			position: relative;
+			z-index: 99;
+			color: #fff;
+			line-height: 40px;
+		}
+		#mynav ul {
+			width: 1000px;
+			padding: 0;
+			margin: 0 auto;
+			list-style-type: none;
+		}
+		
+		#mynav ul li {
+			float: left; margin：0px 5px;
+			border-right: 1px solid #fff;
+			background: #5090c1;
+		}
+		
+		#mynav ul li a {
+			display: block;
+			padding: 0px 20px;
+			height: 40px;
+			line-height: 40px;
+			color: #fff;
+		}
+		</style>
+		
+		<div id="mynav">
+			<ul>
+				<li id="test1" style=""><a onclick="showA()">区域信息</a></li>
+				<li><a onclick="showD()">机构信息</a></li>
+			</ul>
+		</div>
+
+		<div id="rcontent" style="border: 1px solid #38A3D5;">
+			<div id="rcontent_check_A" style="display:;margin: 4%;" >
+					<table class="table table-bordered" height="130px" >
+						<tr bgcolor="#F1F1F1" align="center">
+							<td  align="right" width="40%">机构名称：</td>
+							<td id="name_A"  align="center">测试</td>
+						</tr>
+						<tr>
+							<td  align="right" >机构编码：</td>
+							<td id="code_A" align="center"></td>
+						</tr>
+						<tr bgcolor="#F1F1F1">	
+							<td  align="right">机构类型：</td>
+							<td id="type_A" align="center"></td>
+						</tr>
+					</table>
+					<div align="right" style="margin: 2%">
+						<input type="submit"  value="修改" class="btn btn-info"
+							href="#modal-container-B" data-toggle="modal" 
+							style="height:90%;width: 80px;" />
+					</div>
+			</div>
+	
+					<div id="rcontent_check_D" style="display:none;margin: 4%;" >
+				<div id="info_check_D"></div>
+				<!-- 添加医疗机构 -->
+				<form style="" method="post" id="area_org_add">
+					{% csrf_token %}
+					<table class="table table-bordered"  >
+						<tr bgcolor="#F1F1F1">
+							<td id="error_D" align="center" style="display:none;color:red;height:90%;" colspan="2" ></td>
+						</tr>
+						<tr bgcolor="#F1F1F1">
+							<td align="right" width="40%">医疗机构名称：</td>
+							<td ><input type="text" id="name_D"
+								style=" height:90%;width: 90%;" /></td>
+						</tr>
+						<!-- 
+						<tr>
+							<td  align="right" >医疗机构编码：</td>
+							<td ><input type="text" id="code_D" old_codeE=""
+								style="height:90%;width: 90%;" /></td>
+						</tr>
+						 -->
+						<tr  bgcolor="#F1F1F1">
+							<td  align="right">医疗机构类型：</td>
+	
+							<td ><input type="text" id="type_D"
+								style="height:90%;width: 90%;" /></td>
+	
+						</tr>
+						
+						<tr >
+							<td  align="right">父机构编码：</td>
+	
+							<td ><input type="text" id="pcode_D"
+								style="height:90%;width: 90%;" /></td>
+	
+						</tr>
+						 
+						<tr bgcolor="#F1F1F1">
+							<td  align="right" >医疗机构区域编码：</td>
+	
+							<td id="orgarea_D"> </td>
+						</tr>
+											<tr >
+							<td  align="right" >医疗机构levelOrder：</td>
+	
+							<td > <select name="select_D" id="select_D" style="width: 90%">
+					<option value=0>请选择</option> 
+					<option value=1>1</option>
+					<option value=2>2</option>
+					<option value=3>3</option>
+					<option value=4>4</option>
+								</select>
+							</td>
+	
+						</tr>
+					</table>
+					<div align="right" style="margin: 2%">
+						<input type="submit" id="submit_area_org_add" value="添加" class="btn btn-info"
+							style="height:90%;width: 80px;" />
+					</div>
+				</form>			
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %} 
+{% block script_content %}
+<script type="text/javascript" src="/static/js/jquery.tree.js"></script>
+<script type="text/javascript" src="/static/js/navfix.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(e) {
+		$('#mynav').navfix(0, 999);
+		$.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'  },
+       });
+	});
+	//第一个值： 你期望导航在距离顶部多少的位置浮动
+	//第二个值： 导航zindex
+</script>
+<script type="text/javascript" src="/static/js/page_js/base.js"></script>
+<script type="text/javascript" src="/static/js/page_js/area_manager.js"></script>	
+{% endblock %}

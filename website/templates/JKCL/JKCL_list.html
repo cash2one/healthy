@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% block right_content %}
+
+<div class="title_right">
+	<strong>{{ key_name }}</strong>
+</div>
+
+
+<form method="post" id="form_ehr_query">
+	{% csrf_token %}
+	<table class="table table-bordered" id="table_query" sytle="border:0px;">
+		<thead>
+			<tr>
+				<th colspan="12" align="center">{{ key_name }}查询</th>
+			</tr>
+		</thead>
+<style type="text/css">
+#table_query {
+    border-left: 1px solid #dddddd;
+    height:120px;
+   // border-right:0;
+   // border-bottom:0;
+}
+.table-bordered td{
+ //   border-bottom:1px solid #dddddd;
+ 	padding: 0px 3px;
+}
+input[type="text"]{
+	    height: 30px;
+}
+</style>
+
+		<tr >
+			<td style="border: 0px;width: 10%"></td>
+			<td colspan="1" align="right" bgcolor="#F1F1F1">姓名：</td>
+
+			<td colspan="2"><input type="text" name="input1" id="name" style="width: 90%;" /></td>
+
+			<td colspan="1" align="right" bgcolor="#F1F1F1">身份证号码：</td>
+
+			<td colspan="2"><input type="text" name="input2" id="idCard" style="width: 90%;" /></td>
+			<td style="border-top: 0px;border-bottom:0;width: 10%"></td>
+		</tr>
+	 	
+	 	<tr>
+			<td id="csrf_token" style="display:none;" >{{ csrf_token }}</td>
+		 </tr>
+		 
+	</table>
+	<div align="middle">
+		<input type="submit" id="submit" value="查询" class="btn btn-info" style="width: 80px;" />
+	</div>
+
+</form>
+<div id="data"></div>
+<div id="pageplugin">
+	<ul class="pager">
+		<li><a id="firstpage" type="button" href="javascript:;"
+			data-pageurl="/YITJI/phy/list?menuid=36&amp;limit=10&amp;offset=0">首页</a></li>
+
+		<li><a id="prepage" type="button" href="javascript:;">上页</a></li>
+
+		<li><input id="pageinput" class="input-mini" type="text" data-pagelimit="10" data-pagenum="0"
+			data-pageurl="/YITJI/phy/list?menuid=36&amp;limit=10&amp;offset=" value="0/0"></li>
+
+		<li><a id="nextpage" type="button" href="javascript:;">下页</a></li>
+		<li><a id="lastpage" type="button" href="javascript:;">尾页</a></li>
+
+		<span style="margin-left: 20px; color: #075694;">共<span id='records_num'></span>条记录
+		</span>
+	</ul>
+</div>
+{% endblock %} 
+{% block script_content %}
+<script type="text/javascript" src="/static/js/page_js/base.js"></script>
+<script type="text/javascript" src="/static/js/page_js/JKCL_list.js">
+</script>
+{% endblock %}

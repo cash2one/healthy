@@ -1,0 +1,286 @@
+{% extends 'base.html' %} 
+{% block right_content %}
+
+
+		<div class="title_right">
+			<strong>{{ key_name }}</strong>
+		</div>
+
+			<table class="table table-striped table-bordered table-hover" style="vertical-align: middle">
+				<thead>
+					<tr>
+						<th colspan="12">个人基本信息</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="2" width="15%">姓名</td>
+						<td colspan="4" width="35%">{{record.name}}</td>
+						<td colspan="2" width="15%">健康档案编号</td>
+						<td colspan="4" width="35%">{{record.healthFileNumber}}</td>
+					</tr>
+					<tr>
+						<td class="tdstyle3" colspan="2">性别</td>
+						<td class="tdstyle4" colspan="4">{{record.genderCode}}</td>
+						<td class="tdstyle3" colspan="2">出生日期</td>
+						<td class="tdstyle4" colspan="4">{{record.birthday}}</td>
+					</tr>
+					<tr>
+						<td class="tdstyle3" colspan="2">身份证号</td>
+						<td class="tdstyle4" colspan="4">{{record.idCard}}</td>
+						<td class="tdstyle3" colspan="2">工作单位</td>
+						<td class="tdstyle4" colspan="4">{{record.workUnit}}</td>
+					</tr>
+					<tr>
+						<td class="tdstyle3" colspan="2" width="15%">本人电话</td>
+						<td class="tdstyle4" colspan="2" width="18%">{{record.phone}}</td>
+						<td class="tdstyle3" colspan="2" width="15%">联系人姓名</td>
+						<td class="tdstyle4" colspan="2" width="18%">{{record.contacts}}</td>
+						<td class="tdstyle3" colspan="2" width="15%">联系人电话</td>
+						<td class="tdstyle4" colspan="2" width="19%">{{record.contactsPhone}}</td>
+					</tr>
+					<tr>
+						<td class="tdstyle3" colspan="2">常住类型</td>
+						<td class="tdstyle4" colspan="4">{{record.residentType}}</td>
+						<td class="tdstyle3" colspan="2">民族</td>
+						<td class="tdstyle4" colspan="4">{{record.ethnicityName }}</td>
+					</tr>
+					<tr>
+						<td class="tdstyle3" colspan="2">血型</td>
+						<td class="tdstyle4" colspan="10">{{record.bloodGroupCode}}</td>
+					</tr>
+					<tr>
+						<td class="tdstyle3" colspan="2">文化程度</td>
+						<td class="tdstyle4" colspan="10">{{record.eduBGCode}}</td>
+					</tr>
+					<tr>
+						<td class="tdstyle3" colspan="2">职业</td>
+						<td class="tdstyle4" colspan="10">{{record.occupationCode}}</td>
+					</tr>
+					<tr>
+						<td class="tdstyle3" colspan="2">婚姻状况</td>
+						<td class="tdstyle4" colspan="10">{{record.maritalStatusCode}}</td>
+					</tr>
+					<tr>
+						<td class="tdstyle3" colspan="2">医疗费用支付方式</td>
+						<td class="tdstyle4" colspan="10">{{record.paymentMethodCodes}}</td>
+					</tr>
+					<tr>
+						<td class="tdstyle3" colspan="2">药物过敏史</td>
+						<td class="tdstyle4" colspan="10">
+							<span style="margin-right: 3px">{{record.drugAllergyHistoryCodes}} </span>
+							<br>
+							</td>
+						</tr>
+						<tr>
+							<td class="tdstyle3" colspan="2">暴露史</td>
+							<td class="tdstyle4" colspan="10">
+								<span style="margin-right: 3px">{{record.exposureHistoryCodes}}</span>
+								<br>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="tdstyle3" rowspan="4" style="writing-mode: tb-rl">既往病史</td>
+								<td class="tdstyle4">疾病</td>
+								<td class="tdstyle4" colspan="10">
+									<!-- 疾既往病史pasthistory：1.2.3.4.-->
+							{% for history in historys %}
+								{%ifequal history.pastHistoryType "1"%}
+								{{history.pastHistoryCode}}
+								
+								{%endifequal%}
+							{%endfor%}	
+						</td>
+							</tr>
+							<tr>
+								<td class="tdstyle3">手术</td>
+								<td class="tdstyle4" colspan="10">
+						{% for history in historys %}
+								{%ifequal history.pastHistoryType "2"%}
+								{{history.pastHistoryCode}}
+								
+								{%endifequal%}
+							{%endfor%}	
+						</td>
+							</tr>
+							<tr>
+								<td class="tdstyle3">外伤</td>
+								<td class="tdstyle4" colspan="10">
+									<!-- 外伤记录 -->
+							{% for history in historys %}
+								{%ifequal history.pastHistoryType "3"%}
+								{{history.pastHistoryCode}}
+								
+								{%endifequal%}
+							{%endfor%}	
+						</td>
+							</tr>
+							<tr>
+								<td class="tdstyle3">输血</td>
+								<td class="tdstyle4" colspan="10">
+						{% for history in historys %}
+								{%ifequal history.pastHistoryType "4"%}
+								{{history.pastHistoryCode}}&nbsp &nbsp &nbsp
+								
+								{%endifequal%}
+							{%endfor%}	
+						</td>
+							</tr>
+
+							<tr>
+								<td class="tdstyle3" rowspan="4">家族史</td>
+								<td class="tdstyle4">父亲</td>
+								<td class="tdstyle4" colspan="10">{{record.familyHistoryFatherCodes}}</td>
+							</tr>
+							<tr>
+								<td class="tdstyle4">母亲</td>
+								<td class="tdstyle4" colspan="10">{{record.familyHistoryMatherCodes}}</td>
+							</tr>
+							<tr>
+								<td class="tdstyle4">兄弟姐妹</td>
+								<td class="tdstyle4" colspan="10">{{record.brotherAndSisterCodes}}</td>
+							</tr>
+							<tr>
+								<td class="tdstyle4">子女</td>
+								<td class="tdstyle4" colspan="10">{{record.familyHistoryChildrenCodes}}</td>
+							</tr>
+							<tr>
+								<td class="tdstyle4" colspan="2">遗传病史</td>
+								<td class="tdstyle4" colspan="10">{{record.geneticHistoryCode}}</td>
+							</tr>
+							<tr>
+								<td class="tdstyle4" colspan="2">残疾情况</td>
+								<td class="tdstyle4" colspan="10">
+									<span style="margin-right: 3px"> {{record.disabilityCodes}}</span>
+									<span style="margin-right: 2px">
+									</span>
+									<br>
+									</td>
+								</tr>
+								<tr>
+									<td class="tdstyle4" rowspan="5">生活环境</td>
+									<td class="tdstyle4">厨房排风设置</td>
+									<td class="tdstyle4" colspan="10">{{record.kitchenExhaustCode}}</td>
+								</tr>
+								<tr>
+									<td class="tdstyle4">燃料类型</td>
+									<td class="tdstyle4" colspan="10">
+										<span> {{record.fuelTypeCode}} </span>
+									</td>
+								</tr>
+								<tr>
+									<td class="tdstyle4">饮水</td>
+									<td class="tdstyle4" colspan="10">
+										<span> {{record.waterCode}} </span>
+									</td>
+								</tr>
+								<tr>
+									<td class="tdstyle4">厕所</td>
+									<td class="tdstyle4" colspan="10">
+										<span> {{record.toiletCode}} </span>
+									</td>
+								</tr>
+								<tr>
+									<td class="tdstyle4">禽畜栏</td>
+									<td class="tdstyle4" colspan="10">
+										<span> {{record.livestockColumnCode}} </span>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th colspan="4">个人其他信息</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="tdstyle3" width="15%">过敏史其他描述</td>
+									<td class="tdstyle4" width="35%">{{record.drugAllergyHistoryOther}}</td>
+									<td class="tdstyle3">其他残疾描述</td>
+									<td class="tdstyle4">{{record.disabilityOther}}</td>
+								</tr>
+
+								<tr>
+									<td class="tdstyle3">暴露史代码</td>
+									<td class="tdstyle4">{{record.exposureHistoryCodes}}</td>
+
+									<td class="tdstyle3">遗传性疾病史</td>
+									<td class="tdstyle4">{{record.geneticHistoryCode}}</td>
+								</tr>
+								<tr>
+									<td class="tdstyle3">父亲其他疾病描述</td>
+									<td class="tdstyle4">{{record.familyHistoryFatherOther}}</td>
+									<td class="tdstyle3">母亲其他疾病描述</td>
+									<td class="tdstyle4">{{record.familyHistoryMatherOther}}</td>
+								</tr>
+								<tr>
+									<td class="tdstyle3">兄弟姐妹其他疾病描述</td>
+									<td class="tdstyle4">{{record.brotherAndSisterOther}}</td>
+									<td class="tdstyle3">子女其他疾病描述</td>
+									<td class="tdstyle4">{{record.familyHistoryChildrenOther}}</td>
+								</tr>
+								<tr>
+									<td class="tdstyle3">医疗费用支付方式（卡）</td>
+									<td class="tdstyle4">{{record.paymentMethodCodes}}</td>
+									<td class="tdstyle3">医疗费用支付方式其他描述</td>
+									<td class="tdstyle4">{{record.paymentMethodOther}}</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th colspan="4">责任医生</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="tdstyle3" width="15%">责任医师姓名</td>
+									<td class="tdstyle4" width="35%">{{record.responsibleDoctorName}}</td>
+									<td class="tdstyle3" width="15%">责任医师代码</td>
+									<td class="tdstyle4" width="35%">
+							{{record.responsibleDoctorCode}}</td>
+								</tr>
+							</tbody>
+						</table>
+
+
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th colspan="4">建档情况</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="tdstyle3" width="15%">建档人员姓名</td>
+									<td class="tdstyle4" width="35%">{{record.registerDoctorName}}</td>
+									<td class="tdstyle3" width="15%">建档人员代码</td>
+									<td class="tdstyle4" width="35%">{{record.registerDoctorCode}}</td>
+								</tr>
+								<tr>
+									<td class="tdstyle3">建档机构名称</td>
+									<td class="tdstyle4">{{record.registerOrgCode}}</td>
+									<td class="tdstyle3">建档日期</td>
+									<td class="tdstyle4">{{record.registerDate}}</td>
+								</tr>
+							</tbody>
+						</table>
+			<table class="margin-bottom-20 table  no-border">
+				<tr>
+					<td class="text-center"><input type="button" value="确定"
+						class="btn btn-info " style="width: 80px;" onclick="location.href=document.referrer"/></td>
+				</tr>
+			</table>
+						
+
+{% endblock %}

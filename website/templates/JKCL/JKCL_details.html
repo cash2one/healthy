@@ -1,0 +1,310 @@
+{% extends 'base.html' %}
+{% block right_content %}
+<head>
+<meta charset="utf8">
+<script src="/static/js/JSON/json2.js"></script>
+</head>
+
+<div class="title_right">
+	<strong>{{ key_name }}{{idCard}}</strong>
+</div>
+<style type="text/css">
+#table_query {
+    border-left: 1px solid #dddddd;
+    height:120px;
+   // border-right:0;
+   // border-bottom:0;
+}
+.table-bordered td{
+ 	padding: 10px 3px;
+ 	border:0;
+}
+select,input[type="text"]{
+	    height: 30px;
+}
+</style>
+
+<form method="post" id="form_ehr_query">
+	{% csrf_token %}
+	<table class="table table-bordered" id="table_query">
+		<thead>
+			<tr>
+				<th colspan="12" align="center">{{ key_name }}详细信息</th>
+			</tr>
+		</thead>
+			
+					<tr  style="margin-right0: 5px;margin-bottom: 25px;table-layout: fixed;">
+						<td colspan="1" rowspan="2">体检类别</td>
+						<td colspan="2" rowspan="2">
+							<ul>
+								<select name="item" id="item" style="width: 90%; 	table-layout: fixed;">
+									
+									<option value="wbc">白细胞</option>
+									
+									<option value="ew">默认额温</option>
+									<option value="ew-btType-oral">口腔温度</option>
+									<option value="ew-btType-rect">直肠温度</option>
+									<option value="ew-btType-body">腋下温度</option>
+									
+									<option value="pro">尿蛋白</option>
+									<option value="bld">潜血</option>
+									<option value="uglu">尿糖</option>
+									<option value="ket">尿酮体</option>
+									<option value="leu">白细胞（尿液测量）</option>
+									<option value="ubg">尿胆原</option>
+									<option value="ph">Ph值</option>
+									<option value="nqt">亚硝酸盐</option>
+									<option value="bil">胆红素</option>
+									<option value="vc">维生素C</option>
+									<option value="sg">比重</option>
+									
+									<option value="xdsj">心电数据</option>
+									<option value="ecgImage">心电图数据</option>
+									
+									<option value="xt-mealType-limosis">空腹血糖</option>
+									<option value="xt-mealType-after_meal">餐后血糖</option>
+									<option value="XY">血压</option>
+									<option value="szy">舒张压</option>
+									<option value="ssy">收缩压</option>
+									<option value="ml">脉率</option>
+									
+									<option value="xy">血氧</option>
+									
+									<option value="weight">体重</option> 
+									<option value="height">身高</option> 
+									<option value="bmi">bmi</option>
+									<option value="bfr">脂肪含量（百分比）</option>
+									<option value="smrwb">肌肉含量</option>
+									<option value="vfl">内脏脂肪指数</option>
+									<option value="bodyAge">身体年龄</option>
+									<option value="bme">基础代谢率</option>
+									<option value="skms">骨骼率</option>
+									<option value="bwr">水分含量</option>
+									
+									<option value ="stepCount">运动步数</option>
+									<option value ="stepLength">步长厘米</option>
+									<option value ="comsumeHeat">消耗热量千卡路里Kcal</option>
+									<option value ="burnFat">消耗脂肪（克）</option>
+								</select>
+							</ul>
+							<ul>
+								<select name="liveaddr" id="select1" style="width: 90%; 	table-layout: fixed;">
+									<option value="">请选择</option> 
+								</select>
+							</ul>	
+						</td>
+						<td colspan="1" align="right" bgcolor="">检查日期：</td>
+			
+						<td colspan="2"><input type="text" class="laydate-icon " id="Calendar1" value="1970-01-01"
+							style="width: 90%" /></td>
+			
+						<td colspan="1" align="right" bgcolor="">至：</td>
+			
+						<td colspan="2"><input type="text" class="laydate-icon " id="Calendar2" value="2016-01-21"
+							style="width: 90%" /></td>
+						<td>
+							<input type="submit" id="submit1" value="查询" class="btn btn-info" style="width: 80px;" />
+						</td>
+							
+					</tr>
+					<tr>
+						<td colspan="1"  align="right"  >体检次数</td>
+						<td colspan="2" >
+							<select name="liveaddr" id="select1" style="width: 90%; 	table-layout: fixed;">
+									<option value="">请选择</option> 
+							</select>
+						</td>
+						<td>
+							<input type="submit" id="submit2" value="查询" class="btn btn-info" style="width: 80px;" />
+						</td>
+						
+					</tr>
+					<tr>
+						<td id="csrf_token" style="display:none;" >{{ csrf_token }}</td>
+					 </tr>
+								
+				</table>
+				<div id="container" style="min-width: 310px; height: 650px; margin: 0 auto"></div>
+			<table class="margin-bottom-20 table  no-border">
+				<tr>
+					<td class="text-center"><input type="button" value="确定"
+						class="btn btn-info " style="width: 80px;" onclick="history.go(-1)"/></td>
+				</tr>
+			</table>
+			
+<script type="text/javascript">
+!function() {
+	laydate.skin('molv');
+	laydate({
+		elem : '#Calendar1'
+	});
+	laydate({
+		elem : '#Calendar2'
+	});
+}();
+function getData(itemName)
+{
+	var idCard = "{{idCard}}";
+	var filter = {};
+	if(itemName.length==3){
+		filter[itemName[1]]=itemName[2];
+	}
+	var item=new Array();
+	item[0]=itemName[0];
+	if(itemName[0]=="XY")
+	{
+			item[0]="ssy";
+			item[1]="szy";
+	}
+	var start= $('#Calendar1').val();
+	var end= $('#Calendar2').val();
+	
+//	var timedata;
+	$.ajax({
+        type:"POST",
+        traditional:true,
+        data: {
+        	idCard : idCard,
+        	filter : JSON.stringify(filter), //数组和字典，需要先序列化，使用json格式传入
+        	item : JSON.stringify([item]),
+			start : start,
+			end:end,
+  			},// 页码，每页的记录个数
+        url: "/JKCL_details_q/", //后台处理函数的url 这里用的是static url 需要与urls.py中的name一致
+        cache: false,
+        dataType: "json",
+        success: function(result, statues, xml){
+        	       //使用此函数画图
+        	
+        	       draw_charts(result,item);
+        	       
+        },
+        error: function(){
+            alert("false");
+        }
+    });
+   	return true;	
+}
+
+$(document).ready(function(){
+    $.ajaxSetup({
+         data: {csrfmiddlewaretoken: $('#csrf_token').html() },
+    });
+    var qtype = 0; //查询类型：0按日期，1按次数
+    var today = new Date();
+    document.getElementById("Calendar2").value = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+(today.getDate()+1);
+
+	$('#form_ehr_query').submit(
+	function(){
+		var item=$('#item').val();
+		var itemName=new Array();
+		itemName = item.split('-');
+		getData(itemName);
+		
+		return false;
+    } );
+     
+      $('#submit1').click(function(){
+    		  qtype = 0;
+      });
+     $('#submit2').click(function(){
+    	qtype = 1;        
+     });
+  	
+});
+</script>
+		<style type="text/css">
+${demo.css}
+		</style>
+<script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+		<script type="text/javascript">
+function draw_charts(result,item) {
+	var i = 0;
+	var xAxis=new Array();
+	var yAxis=new Array();
+	var timedata=new Array();
+	var timedata2=new Array();
+	var checkName = document.getElementById("item").options[document.getElementById("item").selectedIndex].text;
+	for(i=0;i<result.length;i++){
+		var temp = result[i]['fields']['time'];
+		var year = temp[0]+temp[1]+temp[2]+temp[3];
+		var month = temp[5]+temp[6];
+		var day = temp[8]+temp[9];
+		timedata[i] = {	x:Date.UTC(Number(year),Number(month)-1,Number(day)),
+						y:Number(result[i]['fields']['data'][item[0]]),
+						source:result[i]['model']
+						};
+		if(item.length==2)
+		{
+			timedata2[i] = {x:Date.UTC(Number(year),Number(month)-1,Number(day)),
+							y:Number(result[i]['fields']['data'][item[1]]),
+							source:result[i]['model']
+							};
+		}
+	}
+	var tempSeries=[];
+	if(item.length==2)
+	{
+		tempSeries =  [{
+	        name: item[0],
+	        data: timedata
+	   		 },
+			{
+	   			name: item[1],
+		        data: timedata2
+			}
+		];
+	}
+	else {
+		tempSeries =  [{
+	        name: item[0],
+	        data: timedata
+	   		 }];
+	}
+	$('#container').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: checkName+'变化趋势'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                day : '%Y-%m-%d'
+            },
+            title: {
+                text: '日期'
+            }
+        },
+        yAxis: {
+           
+            title: {
+                text: checkName
+            },
+            min: 0
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '日期：{point.x:%e. %b}<br>测量值： {point.y:.2f} m<br>数据源：{point.source}'
+        },
+
+
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+
+        series: tempSeries
+    });
+};
+		</script>
+{% endblock %}
